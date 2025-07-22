@@ -9,11 +9,6 @@
 #include <vector>
 
 using namespace std;
-/*
-input дляфайлов чекать оба варика
-newip для файлов чекнутьо
-
-*/
 
 string fi(string a,int i){
             for (int j=0;j<3;j++){
@@ -111,12 +106,9 @@ string ss(int number,int sis){
     {
         ans =ss16(numberl%sis) + ans;
         numberl = numberl / sis;
-
     }
     return ans;
 }
-
-
 
 void creatipnew(string dir, int* ip,string* key, bool bo){
     fstream ans;
@@ -171,7 +163,6 @@ void changeip(int* ipis,string nameofdir){
         qe = true;
         for (int i = 0;i <key.size();i++)
             {
-                //дописать  3 иначе
                 if ((key[i] != '.') and (key[i] != ';'))
                     bufr = bufr+ key[i];
                 else
@@ -180,14 +171,8 @@ void changeip(int* ipis,string nameofdir){
                         bufr = "";
                         count++;
                     }
-
-            //сам перевод ipis-> 1 символ;длина;новый ip;
-            //string a[4];
-            //for (int i=0;i<4;i++)
-            //a[i]= buf[i];
             }
             creatipnew(nameofdir,ipis, buf,qe);
-            //for (int i = 0;i <key.size();i++){ }
             }
             else{
                 qe = false;
@@ -197,15 +182,10 @@ void changeip(int* ipis,string nameofdir){
                 buf[0] = "a16";
                 else buf[0] = "a8";
             creatipnew(nameofdir,ipis, buf,qe);
-            
-
-
             }
     }
+}
 
-
-
-}//остановился тут внизу финкция не готова сверху start новым поиском
 void newip(string buffil, string nameofdir, bool ch, int count){
     ifstream buf,fil;
     string bufst,numb,ip;
@@ -227,10 +207,6 @@ void newip(string buffil, string nameofdir, bool ch, int count){
         }
         newip(buffil, nameofdir, ch, numbi-1);
         }
-            /*for(int i= 0;i<6;i++)
-    cout << a[0]<<'.';
-    cout << endl;
-    cout<<numb<<endl;*/
     }}
     else{
         buf.open(buffil,ios::in);
@@ -255,7 +231,6 @@ string namefiloftime(){
     strftime (pr, sizeof(pr), "%d%m%Y%H%M%S" , &tstruct);
     for (int i= 0; i<sizeof(pr)-2;i++)
         ot = ot+pr[i];
-   // ot=ot+".txt";
     return ot;
 }
 
@@ -325,53 +300,9 @@ bool input(string nameofbuffile)
 {while(true){
         string buf1,namefile = "";
         const char buf = '"';
-        cout << " Нажмите "<< buf <<"Enter" << buf <<",чтобы ввести файл. Введите IP или " <<buf <<"-z"<< buf <<" чтобы остановить ввод"<<endl;
+        cout << "Введите IP или " <<buf <<"-z"<< buf <<" чтобы остановить ввод"<<endl;
         getline (cin,buf1);
-        int inbuf = buf1.size();
-        if (inbuf == 0){
-            cout << "Введите"<<buf<<"+"<<buf<<" для перехода к наиписанию директории"<<endl<<"Или введите любой иной символ для перехода к вводу пути к файлу"<<endl; 
-            getline(cin,namefile);
-            if (namefile != "+"){
-            cout << "Введите имя файла(включая обсолютный путь)"<<endl;
-            getline(cin, namefile);
-            if (namefile != nameofbuffile)
-            gofile(namefile,nameofbuffile,true);
-           
-            }
-            else{
-            cout << "Введите дирикторию (включая обсолютный путь или относительный)"<<endl;
-            getline(cin, namefile);
-
-            cout << "Введите дирикторию "<<buf<<"Y"<<buf<<"чтобы перенести излишние данные в файл с ответом"<<endl;// сюда
-            cout<<"Или любой иной символ для чтобы просто пропустить все что не IP"<<endl;
-            string bla;
-            //getline(cin, bla);
-            if (bla == "Y" or bla == "y"){
-                string a= "ls "+ namefile +" >"+nameofbuffile;
-                system(a.c_str());
-                ressi(nameofbuffile,namefile);
-                return 1;
-                }
-            else {
-                string a1 = "buf.txt";
-                fstream a2;
-                a2.open(a1,ios::out);
-                a2.close();
-                string a= "ls "+ namefile +" >"+a1;
-                system(a.c_str());
-                ressi(a1,namefile);
-                a2.close();
-                a2.open(a1,ios::in);
-                while(getline(a2,bla)){{
-                    gofile(bla,nameofbuffile,true);}
-                    
-                }
-                a2.close();
-                delfile(a1);
-                }
-            }
-        }
-        else if (buf1 == "-z")
+        if (buf1 == "-z")
             return 0;
         else 
         gofile(buf1,nameofbuffile,false);
@@ -408,11 +339,7 @@ int main(){
     nameofbuffile = "buffile_"+nameofbuffile;
     cout <<"Буферный файл"<<nameofbuffile<<endl;
     chek = input(nameofbuffile);
-    
-    //cout<<typeid(system("ls")).name();
     newip(nameofbuffile,nameofdir,chek,0);
-
-
     if(qesfordel (nameofbuffile))
         cout<<"Буферный файл"<<nameofbuffile<<endl;
     cout <<"Дириктрия для итоговых файлов"<<nameofdir<<endl;
