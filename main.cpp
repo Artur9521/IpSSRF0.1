@@ -342,10 +342,10 @@ bool input(string nameofbuffile)
             cout << "Введите дирикторию (включая обсолютный путь или относительный)"<<endl;
             getline(cin, namefile);
 
-            cout << "Введите дирикторию "<<buf<<"Y"<<buf<<"чтобы перенести излишние данные в файл с ответом"<<endl;
+            cout << "Введите дирикторию "<<buf<<"Y"<<buf<<"чтобы перенести излишние данные в файл с ответом"<<endl;// сюда
             cout<<"Или любой иной символ для чтобы просто пропустить все что не IP"<<endl;
             string bla;
-            getline(cin, bla);
+            //getline(cin, bla);
             if (bla == "Y" or bla == "y"){
                 string a= "ls "+ namefile +" >"+nameofbuffile;
                 system(a.c_str());
